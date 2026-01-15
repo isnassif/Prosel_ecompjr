@@ -14,6 +14,6 @@ class Company(Base):
     ramo_atuacao = Column(String(50))
     telefone = Column(String(11))
     email = Column(String(50))
-    data_de_cadastro = Column(String(Date))
+    data_de_cadastro = Column(Date)
 
 Base.metadata.create_all(engine)
