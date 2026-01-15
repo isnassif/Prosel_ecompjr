@@ -1,12 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.orm import sessionmaker
+import os
+
+db_host = os.getenv("DB_HOST", "localhost")
 
 url = URL.create(
     drivername="postgresql",
     username="postgres",
     password="post",
-    host="localhost",
+    host=db_host,
     database="ecomp_jr_cadastros",
     port=5432
 )
