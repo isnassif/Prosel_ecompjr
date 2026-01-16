@@ -1,6 +1,24 @@
-<h1>Sistema de Gerenciamento de Empresas (FastAPI & PostgreSQL)</h1> <p>Olá! Este repositório contém uma API robusta desenvolvida para o gerenciamento de cadastros de empresas. O projeto utiliza tecnologias modernas como <strong>FastAPI</strong> para o framework web, <strong>SQLAlchemy</strong> como ORM e <strong>Docker</strong> para containerização, garantindo um ambiente de desenvolvimento isolado e escalonável. Abaixo, apresento o relatório detalhado da arquitetura e funcionalidades.</p>
+<h1>Sistema de Gerenciamento de Empresas com FastAPI & PostgreSQL</h1> 
 
-<section class="container"> <h2>1. Arquitetura de Dados e Persistência</h2> <p>A base do sistema foi construída utilizando o <strong>PostgreSQL</strong> como banco de dados relacional. A integração entre o código Python e o banco é feita através do SQLAlchemy, permitindo uma manipulação de dados orientada a objetos.</p> <div class="metodo"> <ul> <li> <strong>Modelagem (SQLAlchemy):</strong> O arquivo <code>model/company.py</code> define a estrutura da tabela <code>"empresas"</code>, incluindo campos como CNPJ, e-mail e ramo de atuação. O comando <code>create_all(engine)</code> garante que a tabela seja criada automaticamente ao iniciar a aplicação. </li> <li> <strong>Gerenciamento de Sessão (Dependency Injection):</strong> Utilizei o padrão <em>yield</em> na função <code>get_db</code>. Isso garante que cada requisição abra uma conexão exclusiva com o banco e, o mais importante, feche-a automaticamente após o uso, evitando vazamentos de memória (memory leaks). </li> <li> <strong>Configuração Dinâmica:</strong> O arquivo <code>config/db.py</code> utiliza variáveis de ambiente (<code>os.getenv</code>) para localizar o host do banco, permitindo que o mesmo código funcione tanto localmente quanto dentro de containers Docker. </li> </ul> </div>
+<p>Olá! Este repositório contém uma API robusta desenvolvida para o gerenciamento de cadastros de empresas. O projeto utiliza tecnologias modernas como <strong>FastAPI</strong> para o framework web, <strong>SQLAlchemy</strong> como ORM e <strong>Docker</strong> para containerização, garantindo um ambiente de desenvolvimento isolado e escalonável. Esse sistema foi desenvolvimento como desafio técnico para entrar na Ecomp Júnior, a empresa júnior de computação da Universidade Estadual de Feira de Santana. Abaixo, apresento o relatório detalhado da arquitetura e funcionalidades com alguns trechos visuais do código, é importante que você também verifique os códigos.</p>
+
+<section class="container"> 
+  
+<h2>1. Arquitetura de Dados e Persistência</h2> 
+
+<p>A base do sistema foi construída utilizando o <strong>PostgreSQL</strong> como banco de dados relacional. A integração entre o código Python e o banco é feita através do SQLAlchemy, permitindo uma manipulação de dados orientada a objetos.</p> 
+
+<div class="metodo"> 
+  <ul> 
+    <li> <strong>Modelagem (SQLAlchemy):</strong> O arquivo <code>model/company.py</code> define a estrutura da tabela <code>"empresas"</code>, incluindo campos como CNPJ, e-mail e ramo de atuação. O comando <code>create_all(engine)</code> garante que a tabela seja criada automaticamente ao iniciar a aplicação. </li> 
+    <li> <strong>Gerenciamento de Sessão (Dependency Injection):</strong> Utilizei o padrão <em>yield</em> na função <code>get_db</code>. Isso garante que cada requisição abra uma conexão exclusiva com o banco e, o mais importante, feche-a automaticamente após o uso, evitando vazamentos de memória (memory leaks). </li> 
+    <li> <strong>Configuração Dinâmica:</strong> O arquivo <code>config/db.py</code> utiliza variáveis de ambiente (<code>os.getenv</code>) para localizar o host do banco, permitindo que o mesmo código funcione tanto localmente quanto dentro de containers Docker. </li> </ul> </div>
+
+  <div align="center">
+      <img src="https://github.com/user-attachments/assets/79ef0ffb-0bde-4969-99b8-0759cc3f6486" width="393" height="285" style="object-fit: cover;">
+      <br>
+      <em>Figura 1: Código da estrutura da tabela empresas. </em>
+  </div>
 
 <h2>2. Validação e Segurança com Pydantic (Schemas)</h2> <p>Para garantir que os dados inseridos na API sejam íntegros e sigam as regras de negócio, implementei schemas utilizando o <strong>Pydantic</strong>. Isso fornece uma camada de segurança e documentação automática (Swagger).</p>
 
