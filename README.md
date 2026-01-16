@@ -81,11 +81,21 @@
 
 </section>
 
-<h2>5. Interface Automática e Documentação (Swagger UI)</h2> <p>Uma das funcionalidades mais poderosas da arquitetura implementada é a geração automática de documentação interativa. Ao utilizar o FastAPI combinado com os Schemas do Pydantic, o sistema disponibiliza uma interface visual completa para testes sem a necessidade de ferramentas externas como Postman ou Insomnia.</p>
+<h2>5. Interface Automática e Documentação (Swagger UI)</h2> 
 
-<div class="metodo"> <ul> <li> <strong>Swagger UI (/docs):</strong> Acessível diretamente pelo navegador, esta interface lista todos os endpoints criados, os métodos HTTP permitidos e os modelos de dados esperados (JSON), permitindo a execução de requisições em tempo real. </li> <li> <strong>Redoc (/redoc):</strong> Uma documentação alternativa, mais focada em leitura e organização para desenvolvedores externos, apresentando de forma limpa como consumir a API de cadastros. </li> <li> <strong>Teste de Schema em Tempo Real:</strong> A interface valida os campos obrigatórios (como CNPJ e e-mail) antes mesmo de enviar a requisição, exibindo erros de validação visualmente caso algum dado não cumpra os requisitos definidos no <code>schemas/company.py</code>. </li> </ul> </div>
+<p>Uma das funcionalidades mais poderosas da arquitetura implementada é a geração automática de documentação interativa. Ao utilizar o FastAPI combinado com os Schemas do Pydantic, o sistema disponibiliza uma interface visual completa para testes sem a necessidade de ferramentas externas como Postman ou Insomnia, vale ressaltar que a API foi testada no Postman anteriormente. </p>
 
-<div align="center">
+<div class="metodo"> 
+  
+  <ul> 
+  <li> <strong>Swagger UI (/docs):</strong> Acessível diretamente pelo navegador, esta interface lista todos os endpoints criados, os métodos HTTP permitidos e os modelos de dados esperados (JSON), permitindo a execução de requisições em tempo real. </li> 
+  <li> <strong>Redoc (/redoc):</strong> Uma documentação alternativa, mais focada em leitura e organização para desenvolvedores externos, apresentando de forma limpa como consumir a API de cadastros. </li> 
+  <li> <strong>Teste de Schema em Tempo Real:</strong> A interface valida os campos obrigatórios (como CNPJ e e-mail) antes mesmo de enviar a requisição, exibindo erros de validação visualmente caso algum dado não cumpra os requisitos definidos no <code>schemas/company.py</code>. </li> 
+</ul> 
+</div>
 
-
-<em>Figura 4: Interface do Swagger UI gerada automaticamente para o gerenciamento de empresas. </em> </div>
+  <div align="center">
+      <img width="1488" height="600" alt="image" src="https://github.com/user-attachments/assets/65a8577a-ef55-4f57-8dc4-9865209db47a" style="object-fit: cover;">
+      <br>
+      <em>Figura 5: Interface da API </em>
+  </div>
