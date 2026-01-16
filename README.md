@@ -20,15 +20,42 @@
       <em>Figura 1: Código da estrutura da tabela empresas. </em>
   </div>
 
-<h2>2. Validação e Segurança com Pydantic (Schemas)</h2> <p>Para garantir que os dados inseridos na API sejam íntegros e sigam as regras de negócio, implementei schemas utilizando o <strong>Pydantic</strong>. Isso fornece uma camada de segurança e documentação automática (Swagger).</p>
 
-<div class="metodo"> <ul> <li> <strong>Validação de CNPJ:</strong> Implementei um <code>@field_validator</code> customizado para garantir que o CNPJ contenha apenas números, além de restrições de tamanho fixo (14 caracteres), evitando erros de inserção. </li> <li> <strong>Tipagem Estrita (EmailStr):</strong> O uso do tipo <code>EmailStr</code> valida automaticamente se o formato do e-mail é válido (ex: nome@dominio.com) antes mesmo de chegar ao banco de dados. </li> <li> <strong>Schema de Atualização Flexível (companyUpdate):</strong> Diferente do cadastro, o schema de atualização utiliza campos <code>Optional</code>. Isso permite o método <strong>PATCH/PUT</strong> parcial, onde o usuário pode alterar apenas o telefone, por exemplo, sem precisar reenviar todos os outros dados. </li> </ul> </div>
+<h2>2. Validação e Segurança com Pydantic (Schemas)</h2> 
 
-<h2>3. Funcionalidades da API (Endpoints)</h2> <p>A API segue os princípios <strong>RESTful</strong>, oferecendo um CRUD (Create, Read, Update, Delete) completo, além de funcionalidades de busca avançada.</p>
+<p>Para garantir que os dados inseridos na API sejam íntegros e sigam as regras de negócio, implementei schemas utilizando o <strong>Pydantic</strong>. Isso fornece uma camada de segurança e documentação automática, garantindo que garantir que a API nunca processe dados "sujos" ou inválidos.</p>
 
-<div class="metodo"> <ul> <li> <strong>Criação com Lógica de ID e Unicidade:</strong> O endpoint <code>POST</code> verifica se o CNPJ ou E-mail já existem para evitar duplicidade (Erro 409). Além disso, implementei uma lógica manual para encontrar o próximo ID disponível, garantindo organização sequencial. </li> <li> <strong>Filtros Avançados (ILike):</strong> Os endpoints de busca e filtro utilizam o operador <code>.ilike()</code> do SQLAlchemy. Isso permite buscas "case-insensitive" (não diferencia maiúsculas de minúsculas) e parciais, facilitando a localização de empresas por nome ou cidade. </li> <li> <strong>Tratamento de Exceções:</strong> Todos os endpoints possuem verificações <code>if not results</code> que disparam <code>HTTPException 404</code>, retornando mensagens claras para o usuário caso um recurso não seja encontrado. </li> </ul> </div>
+<div class="metodo"> 
+  <ul> 
+    <li> <strong> Validação de CNPJ:</strong>  Implementei um <code>@field_validator</code> customizado para garantir que o CNPJ contenha apenas números, além de restrições de tamanho fixo (14 caracteres), evitando erros de inserção. </li> 
+    <li> <strong> Tipagem Estrita (EmailStr): </strong> O uso do tipo <code>EmailStr</code> valida automaticamente se o formato do e-mail é válido (ex: nome@dominio.com) antes mesmo de chegar ao banco de dados. </li> 
+    <li> <strong> Update Parcial Inteligente: </strong> Diferente do cadastro, o schema de atualização utiliza campos <code>Optional</code>. Isso permite o método <strong>PATCH/PUT</strong> parcial, onde o usuário pode alterar apenas o telefone, por exemplo, sem precisar reenviar todos os outros dados. </li> 
+  </ul> 
+</div>
 
-<h2>4. Containerização com Docker e Docker Compose</h2> <p>Para facilitar o deploy e a padronização do ambiente, a aplicação foi totalmente "dockerizada".</p>
+  <div align="center">
+      <img src="https://github.com/user-attachments/assets/4b22ab58-804b-4ec4-b283-7abcf073b05e" width="649" height="389" style="object-fit: cover;">
+      <br>
+      <em>Figura 2: Código utilizado para atualizar uma empresa e paradefinir os dados de retorno para o usuário. </em>
+  </div>
+
+
+<h2>3. Funcionalidades da API (Endpoints)</h2> 
+
+<p>A API segue os princípios <strong>RESTful</strong>, oferecendo um CRUD (Create, Read, Update, Delete) completo, além de funcionalidades de busca avançada.</p>
+
+<div clss="metodo"> 
+  <ul> 
+    <li> <strong>Criação com Lógica de ID e Unicidade:</strong> O endpoint <code>POST</code> verifica se o CNPJ ou E-mail já existem para evitar duplicidade (Erro 409). Além disso, implementei uma lógica manual para encontrar o próximo ID disponível, garantindo organização sequencial. </li> 
+    <li> <strong>Filtros Avançados (ILike):</strong> Os endpoints de busca e filtro utilizam o operador <code>.ilike()</code> do SQLAlchemy. Isso permite buscas "case-insensitive" (não diferencia maiúsculas de minúsculas) e parciais, facilitando a localização de empresas por nome ou cidade. </li> 
+    <li> <strong>Tratamento de Exceções:</strong> Todos os endpoints possuem verificações <code>if not results</code> que disparam <code>HTTPException 404</code>, retornando mensagens claras para o usuário caso um recurso não seja encontrado. </li> 
+  </ul> 
+</div>
+
+
+<h2>4. Containerização com Docker e Docker Compose</h2> 
+
+<p>Para facilitar o deploy e a padronização do ambiente, a aplicação foi totalmente "dockerizada".</p>
 
 <div class="metodo"> <ul> <li> <strong>Dockerfile Otimizado:</strong> Utilizei a imagem <code>python:3.10-slim</code> para manter o container leve. O processo inclui a instalação de dependências do sistema (<code>libpq-dev</code>) necessárias para a comunicação com o PostgreSQL. </li> <li> <strong>Orquestração (Docker Compose):</strong> O arquivo <code>docker-compose.yml</code> gerencia dois serviços simultâneos: a <code>api</code> (FastAPI) e o <code>db</code> (Postgres). </li> <li> <strong>Interdependência (depends_on):</strong> Configurei a API para aguardar o serviço de banco de dados, garantindo que a aplicação não quebre ao tentar se conectar a um banco que ainda está iniciando. </li> </ul> </div>
 
