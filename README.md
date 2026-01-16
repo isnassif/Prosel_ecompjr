@@ -15,3 +15,12 @@
 <div class="metodo"> <ul> <li> <strong>Dockerfile Otimizado:</strong> Utilizei a imagem <code>python:3.10-slim</code> para manter o container leve. O processo inclui a instalação de dependências do sistema (<code>libpq-dev</code>) necessárias para a comunicação com o PostgreSQL. </li> <li> <strong>Orquestração (Docker Compose):</strong> O arquivo <code>docker-compose.yml</code> gerencia dois serviços simultâneos: a <code>api</code> (FastAPI) e o <code>db</code> (Postgres). </li> <li> <strong>Interdependência (depends_on):</strong> Configurei a API para aguardar o serviço de banco de dados, garantindo que a aplicação não quebre ao tentar se conectar a um banco que ainda está iniciando. </li> </ul> </div>
 
 </section>
+
+<h2>5. Interface Automática e Documentação (Swagger UI)</h2> <p>Uma das funcionalidades mais poderosas da arquitetura implementada é a geração automática de documentação interativa. Ao utilizar o FastAPI combinado com os Schemas do Pydantic, o sistema disponibiliza uma interface visual completa para testes sem a necessidade de ferramentas externas como Postman ou Insomnia.</p>
+
+<div class="metodo"> <ul> <li> <strong>Swagger UI (/docs):</strong> Acessível diretamente pelo navegador, esta interface lista todos os endpoints criados, os métodos HTTP permitidos e os modelos de dados esperados (JSON), permitindo a execução de requisições em tempo real. </li> <li> <strong>Redoc (/redoc):</strong> Uma documentação alternativa, mais focada em leitura e organização para desenvolvedores externos, apresentando de forma limpa como consumir a API de cadastros. </li> <li> <strong>Teste de Schema em Tempo Real:</strong> A interface valida os campos obrigatórios (como CNPJ e e-mail) antes mesmo de enviar a requisição, exibindo erros de validação visualmente caso algum dado não cumpra os requisitos definidos no <code>schemas/company.py</code>. </li> </ul> </div>
+
+<div align="center">
+
+
+<em>Figura 4: Interface do Swagger UI gerada automaticamente para o gerenciamento de empresas. </em> </div>
