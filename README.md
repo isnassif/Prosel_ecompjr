@@ -62,9 +62,22 @@
 
 <h2>4. Containerização com Docker e Docker Compose</h2> 
 
-<p>Para facilitar o deploy e a padronização do ambiente, a aplicação foi totalmente "dockerizada".</p>
+<p>Para facilitar o deploy e a padronização do ambiente, a aplicação utiliza orquestração via Docker Compose, garantindo que todos os serviços (API e Banco de Dados) rodem em ambientes isolados e padronizados.</p>
 
-<div class="metodo"> <ul> <li> <strong>Dockerfile Otimizado:</strong> Utilizei a imagem <code>python:3.10-slim</code> para manter o container leve. O processo inclui a instalação de dependências do sistema (<code>libpq-dev</code>) necessárias para a comunicação com o PostgreSQL. </li> <li> <strong>Orquestração (Docker Compose):</strong> O arquivo <code>docker-compose.yml</code> gerencia dois serviços simultâneos: a <code>api</code> (FastAPI) e o <code>db</code> (Postgres). </li> <li> <strong>Interdependência (depends_on):</strong> Configurei a API para aguardar o serviço de banco de dados, garantindo que a aplicação não quebre ao tentar se conectar a um banco que ainda está iniciando. </li> </ul> </div>
+<div class="metodo"> 
+  <ul> 
+    <li> <strong>Dockerfile Otimizado:</strong> Utilizei a imagem <code>python:3.10-slim</code> para manter o container leve. O processo inclui a instalação de dependências do sistema (<code>libpq-dev</code>) necessárias para a comunicação com o PostgreSQL. </li> 
+    <li> <strong>Orquestração (Docker Compose):</strong> O arquivo <code>docker-compose.yml</code> gerencia dois serviços simultâneos: a <code>api</code> (FastAPI) e o <code>db</code> (Postgres). </li> 
+    <li> <strong>Interdependência (depends_on):</strong> Configurei a API para aguardar o serviço de banco de dados, garantindo que a aplicação não quebre ao tentar se conectar a um banco que ainda está iniciando. </li> 
+  </ul> 
+</div>
+
+  <div align="center">
+      <img width="377" height="504" alt="image" src="https://github.com/user-attachments/assets/3aebfbe6-70d8-4e5a-af12-01b49df1c722" style="object-fit: cover;">
+      <br>
+      <em>Figura 4: Arquivo docker-compose.yml. </em>
+  </div>
+
 
 </section>
 
