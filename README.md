@@ -48,9 +48,18 @@
   <ul> 
     <li> <strong>Criação com Lógica de ID e Unicidade:</strong> O endpoint <code>POST</code> verifica se o CNPJ ou E-mail já existem para evitar duplicidade (Erro 409). Além disso, implementei uma lógica manual para encontrar o próximo ID disponível, garantindo organização sequencial. </li> 
     <li> <strong>Filtros Avançados (ILike):</strong> Os endpoints de busca e filtro utilizam o operador <code>.ilike()</code> do SQLAlchemy. Isso permite buscas "case-insensitive" (não diferencia maiúsculas de minúsculas) e parciais, facilitando a localização de empresas por nome ou cidade. </li> 
-    <li> <strong>Tratamento de Exceções:</strong> Todos os endpoints possuem verificações <code>if not results</code> que disparam <code>HTTPException 404</code>, retornando mensagens claras para o usuário caso um recurso não seja encontrado. </li> 
+    <li> <strong>Tratamento de Exceções:</strong> Todos os endpoints possuem verificações <code>if not results</code> que disparam <code>HTTPException 404</code>, retornando mensagens claras para o usuário caso um recurso não seja encontrado.</li> 
   </ul> 
 </div>
+
+<img width="715" height="356" alt="image" src="" />
+
+
+  <div align="center">
+      <img src="https://github.com/user-attachments/assets/a6ae72ea-9ce4-46b7-9d65-e7954843a58e" width="715" height="356" style="object-fit: cover;">
+      <br>
+      <em>Figura 3: Função para filtrar as empresas. </em>
+  </div>
 
 
 <h2>4. Containerização com Docker e Docker Compose</h2> 
