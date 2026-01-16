@@ -52,8 +52,6 @@
   </ul> 
 </div>
 
-<img width="715" height="356" alt="image" src="" />
-
 
   <div align="center">
       <img src="https://github.com/user-attachments/assets/a6ae72ea-9ce4-46b7-9d65-e7954843a58e" width="715" height="356" style="object-fit: cover;">
